@@ -1,6 +1,7 @@
 .bbpresss_unread_posts_icon{
 	float:left;
 	margin-right:6px;
+	max-width: 45px;
 }
 
 .bbpresss_unread_posts_icon a img{

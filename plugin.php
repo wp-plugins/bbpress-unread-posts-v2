@@ -112,7 +112,7 @@
 	function bbp_unread_forum_icons() {
 		if ( 'forum' == get_post_type()) {
 			$forumId = bbp_get_forum_id();
-			$unread = isForumUnread($forumId);
+			$unread = bbp_isForumUnread($forumId);
 			echo '
 				<div class="bbpresss_unread_posts_icon">
 					<a href="' . bbp_get_forum_last_reply_url($forumId) . '">
@@ -148,7 +148,7 @@ function bbp_isForumUnread($forumId){
 			$subforumID;
 			for ($i = 0; $i <= $max; $i++) {
     				$subforumID= $childs[$i];
-				if(!empty($subforumID) && isForumUnread($subforumID)){
+				if(!empty($subforumID) && bbp_isForumUnread($subforumID)){
 					$isUnread = true;
 					break;
 				}
