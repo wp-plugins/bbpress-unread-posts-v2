@@ -158,10 +158,6 @@ function bbp_isForumUnread($forumId){
 	return $isUnread;
 }
 
-
-
-add_filter( 'bbp_get_dynamic_roles', 'ntwb_bbpress_custom_role_names' );
-
 	
 	
 	
