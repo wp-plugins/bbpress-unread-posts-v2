@@ -2,7 +2,22 @@
 Contributors: coronoro
 Tags: bbpress, topic, forum, unread, last visit
 
+== Description ==
 
+Shows a read/unread icon next to threads and forums (Marks topic as read when the user visits it).
+This Plugin is an update to the older https://wordpress.org/plugins/bbpress-unread-posts/.
+
+
+== Installation ==
+
+This section describes how to install the plugin and get it working.
+
+1. Upload the 'bbpress-unread-posts v2' folder to the '/wp-content/plugins/' directory
+2. Activate the plugin through the 'Plugins' menu in WordPress
+
+Optional:
+
+3. If you want to change the icons please put yours in the images folder and name them exactly like the already existing files.
 
 === bbPress Unread Posts ===
 Contributors: destroflyer
