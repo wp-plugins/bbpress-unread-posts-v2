@@ -24,4 +24,7 @@ Optional:
 == Changelog ==
 
 = 1.0.1 =
+Fixed Error with Imagepath
+
+= 1.0.0 =
 * Initial release
