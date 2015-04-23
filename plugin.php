@@ -116,7 +116,7 @@
 			echo '
 				<div class="bbpresss_unread_posts_icon">
 					<a href="' . bbp_get_forum_last_reply_url($forumId) . '">
-						<img src="' . plugins_url("bbpress-unread-posts/images/" . ($unread ?"folder_new.gif":"folder.gif"), "bbpress-unread-posts") . '">
+						<img src="' . plugins_url("images/" . ($isUnreadTopic?"folder_new.gif":"folder.gif"), __FILE__) . '">
 					</a>
 				</div>
 				<div style="display:table-cell;">
