@@ -23,6 +23,9 @@ Optional:
 
 == Changelog ==
 
+= 1.0.2 =
+added Logging and fixed a update bug
+
 = 1.0.1 =
 Fixed Error with Imagepath
 

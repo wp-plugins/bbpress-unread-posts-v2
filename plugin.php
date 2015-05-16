@@ -5,6 +5,7 @@
 	Version: 1.0.1
 	Author: coronoro, destroflyer
 	*/
+	include 'logging.php';
 	
 	add_action("init", "bbp_unread_posts_Initialize");
 	
@@ -116,7 +117,7 @@
 			echo '
 				<div class="bbpresss_unread_posts_icon">
 					<a href="' . bbp_get_forum_last_reply_url($forumId) . '">
-						<img src="' . plugins_url("images/" . ($isUnreadTopic?"folder_new.gif":"folder.gif"), __FILE__) . '">
+						<img src="' . plugins_url("images/" . ($unread ? "folder_new.gif"  :"folder.gif"), __FILE__) . '">
 					</a>
 				</div>
 				<div style="display:table-cell;">
@@ -127,6 +128,7 @@
 
 
 function bbp_isForumUnread($forumId){
+	bbp_unread_posts_clog("forum: ". bbp_get_forum_title($forumId));
 	$isUnread = false;
 	if($forumId != null && !empty($forumId)){
 		$childs = bbp_get_all_child_ids($forumId, bbp_get_topic_post_type() );
@@ -134,11 +136,14 @@ function bbp_isForumUnread($forumId){
 		$topicID;
 		for ($i = 0; $i <= $max; $i++) {
     			$topicID= $childs[$i];
+    			bbp_unread_posts_clog(" -- found subtopic: $topicID");
 			if(!empty($topicID)){
 				$topicLastActiveTime = bbp_convert_date(get_post_meta($topicID, '_bbp_last_active_time', true));
 				$lastVisitTime = get_post_meta($topicID, bbp_unread_posts_getLastVisitMetaKey(), true);
 				if($topicLastActiveTime > $lastVisitTime){
 					$isUnread = true;
+					bbp_unread_posts_clog(" -- unread topic:". $isUnread);
+					break;
 				}
 			}
 		}
@@ -148,8 +153,10 @@ function bbp_isForumUnread($forumId){
 			$subforumID;
 			for ($i = 0; $i <= $max; $i++) {
     				$subforumID= $childs[$i];
+    				bbp_unread_posts_clog(" -- found subforum:". bbp_get_forum_title($subforumID));
 				if(!empty($subforumID) && bbp_isForumUnread($subforumID)){
 					$isUnread = true;
+					bbp_unread_posts_clog(" -- unread forum:" .$isUnread);
 					break;
 				}
 			}
