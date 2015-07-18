@@ -2,7 +2,7 @@
 /*
  * Plugin Name: bbPress Unread Posts v2
  * Description: Displays an icon next to each thread and forum if there are unread posts for the current user in it.
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: coronoro
  */
 include 'logging.php';
@@ -124,7 +124,8 @@ function bbp_is_topic_unread($topicID){
 function bbp_unread_forum_icons(){
 	if ('forum' == get_post_type ()) {
 		if(bbp_unread_posts_IsMarkAllTopicsAsReadRequested()){
-			$forumId = bbp_unread_posts_getRootForumId();
+			//$forumId = bbp_unread_posts_getRootForumId();
+			$forumId = bbp_get_forum_id ();
 			bbp_markAllUnread($forumId);
 			$unread = false;
 		}else{
@@ -172,15 +173,18 @@ function bbp_isForumUnread($forumId){
 }
 
 function bbp_markAllUnread($forumId){
-	bbp_unread_posts_clog ( "marking all topic for: " . bbp_get_forum_title ( $forumId ) . " as unread" );
+	bbp_unread_posts_clog ( "marking all topic for forum: " . bbp_get_forum_title ( $forumId ) . " as unread" );
+	bbp_unread_posts_clog ( "forum id: " . $forumId);
 	if ($forumId != null && ! empty ( $forumId )) {
-		$childs = bbp_get_all_child_ids ( $forumId, bbp_get_topic_post_type () );
+		$childs = bbp_get_all_child_ids ( $forumId, bbp_get_topic_post_type() );
 		$max = count ( $childs );
 		$topicID;
 		for($i = 0; $i <= $max; $i ++) {
 			$topicID = $childs [$i];
+			bbp_unread_posts_clog ( "found topic " . bbp_get_topic_title($topicID) . "with id : " . $topicID);
 			if (! empty ( $topicID ) && bbp_is_topic_unread ( $topicID )) {
 				bbp_unread_posts_UpdateLastTopicVisit($topicID);
+				bbp_unread_posts_clog ( "marking it as unread" );
 			}
 		}
 		$childs = bbp_get_all_child_ids ( $forumId, bbp_get_forum_post_type () );
@@ -188,9 +192,9 @@ function bbp_markAllUnread($forumId){
 		$subforumID;
 		for($i = 0; $i <= $max; $i ++) {
 			$subforumID = $childs [$i];
-			if (! empty ( $subforumID )) {
-				bbp_isForumUnread ( $subforumID );
-			}
+			bbp_unread_posts_clog ( " -- found subforum " . bbp_get_forum_title($subforumID). "with id : " . $subforumID);
+			//bbp_unread_posts_clog ( !empty( $subforumID));
+				bbp_markAllUnread($subforumID);
 		}
 	}
 }

@@ -23,6 +23,9 @@ Optional:
 
 == Changelog ==
 
+= 1.0.4 =
+Fixed Bug with all unread button not saving
+
 = 1.0.3 =
 added a mark all as unread button
 
