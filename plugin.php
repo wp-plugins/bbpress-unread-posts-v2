@@ -2,11 +2,11 @@
 /*
  * Plugin Name: bbPress Unread Posts v2
  * Description: Displays an icon next to each thread and forum if there are unread posts for the current user in it.
- * Version: 1.0.4
+ * Version: 1.0.4-1
  * Author: coronoro
  */
 include 'logging.php';
-include 'bbp_unread_options.php';
+//include 'bbp_unread_options.php';
 
 add_action ( "init", "bbp_unread_posts_Initialize" );
 add_action ( 'admin_menu', 'bbp_unread_posts_plugin_menu' );
@@ -25,7 +25,7 @@ function bbp_unread_posts_Initialize(){
 }
 
 function bbp_unread_posts_plugin_menu(){
-	add_options_page ( "Unread Posts", "Unread Posts", 'manage_options', 'bbpUnreadPosts', 'bpp_unread_settings_page' );
+	//add_options_page ( "Unread Posts", "Unread Posts", 'manage_options', 'bbpUnreadPosts', 'bpp_unread_settings_page' );
 }
 
 function bbp_unread_posts_PerformTopicSpecificActions(){
